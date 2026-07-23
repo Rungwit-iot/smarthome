@@ -4,186 +4,64 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
   <meta name="theme-color" content="#14532d">
-  <meta name="description" content="เกมจับคู่พรรณไม้สำหรับกิจกรรมสวนพฤกษศาสตร์โรงเรียน">
+  <meta name="description" content="เกมจับคู่ชื่อพรรณไม้ภาษาไทยกับการใช้ประโยชน์">
   <title>ภารกิจผู้พิทักษ์พรรณไม้</title>
   <link rel="manifest" href="manifest.webmanifest">
   <style>
-    :root{--green:#166534;--green2:#22c55e;--soft:#dcfce7;--bg:#f0fdf4;--text:#143322;--danger:#b91c1c;--amber:#92400e;--radius:20px}
+    :root{--g:#166534;--g2:#22c55e;--soft:#dcfce7;--bg:#f0fdf4;--text:#143322;--danger:#b91c1c;--r:20px}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:system-ui,-apple-system,"Noto Sans Thai",sans-serif;background:radial-gradient(circle at top,#dcfce7 0,#f8fff9 42%,#f0fdf4 100%);color:var(--text);min-height:100vh}
-    button,input,select{font:inherit}button{cursor:pointer}.wrap{max-width:920px;margin:auto;padding:14px 14px 40px}.hero{position:relative;overflow:hidden;background:linear-gradient(135deg,#14532d,#16a34a);color:#fff;padding:24px;border-radius:28px;margin-bottom:14px;box-shadow:0 18px 45px #14532d2b}.hero:after{content:"";position:absolute;right:-45px;bottom:-65px;width:180px;height:180px;border-radius:50%;background:#ffffff16}.hero h1{font-size:clamp(1.45rem,5vw,2.25rem);margin:0 0 4px}.hero p{margin:0;opacity:.92}.toprow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:#ffffff1c;border:1px solid #ffffff33;font-size:.85rem}.dot{width:9px;height:9px;border-radius:50%;background:#fbbf24}.dot.online{background:#86efac}.card{background:#fff;border:1px solid #bbf7d0;border-radius:var(--radius);padding:18px;margin:12px 0;box-shadow:0 10px 28px #14532d12}.grid{display:grid;gap:12px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.actions{display:flex;gap:10px;flex-wrap:wrap}.actions>*{flex:1 1 180px}.btn,input,select{width:100%;min-height:48px;border-radius:14px;padding:11px 13px}.btn{border:0;background:var(--green);color:#fff;font-weight:800;box-shadow:0 7px 18px #16653424}.btn:hover{filter:brightness(1.05)}.btn.secondary{background:#fff;color:var(--green);border:1px solid #22c55e;box-shadow:none}.btn.warn{background:#b45309}.btn.danger{background:#b91c1c}.btn:disabled{opacity:.45;cursor:not-allowed}input,select{border:1px solid #86efac;background:#fff;color:var(--text);outline:none}input:focus,select:focus{border-color:#16a34a;box-shadow:0 0 0 4px #22c55e22}label{font-weight:700;display:block;margin-bottom:12px}label span{display:block;margin-bottom:6px}.hidden{display:none!important}.status{padding:12px 14px;border-radius:15px;background:#f0fdf4;border:1px dashed #4ade80}.status.error{background:#fef2f2;border-color:#f87171;color:#991b1b}.status.warn{background:#fffbeb;border-color:#fbbf24;color:#92400e}.small{font-size:.9rem;color:#52695a}.metrics{position:sticky;top:8px;z-index:5;margin-bottom:12px}.metric{text-align:center;background:#fff;border-radius:16px;padding:10px;border:1px solid #bbf7d0;box-shadow:0 6px 18px #14532d12}.metric b{display:block;font-size:1.45rem}.pairBtn{width:100%;min-height:78px;background:#fff;color:var(--text);border:1px solid #86efac;border-radius:15px;padding:12px;text-align:left;font-weight:700;transition:.15s}.pairBtn:hover{transform:translateY(-1px);border-color:#16a34a}.pairBtn.sel{outline:3px solid #22c55e;background:#f0fdf4}.pairBtn.done{opacity:.25;text-decoration:line-through;transform:none}.rank{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:8px;padding:11px 5px;border-bottom:1px solid #dcfce7}.rank:first-child .rankno{background:#fef3c7}.rank:nth-child(2) .rankno{background:#e5e7eb}.rank:nth-child(3) .rankno{background:#fed7aa}.rankno{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:#dcfce7;font-weight:900}.pill{display:inline-block;background:#dcfce7;color:#166534;padding:4px 10px;border-radius:999px;font-size:.85rem}.roomcode{font-size:2rem;letter-spacing:.14em;font-weight:900}.center{text-align:center}.qrbox{display:inline-block;background:#fff;border:8px solid #fff;border-radius:18px;margin:12px 0;box-shadow:0 8px 24px #14532d24}.progress{height:9px;border-radius:999px;background:#dcfce7;overflow:hidden;margin-top:8px}.progress>div{height:100%;background:#16a34a;width:0;transition:.2s}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#143322;color:#fff;padding:11px 16px;border-radius:999px;z-index:20;box-shadow:0 12px 28px #0003}.footer{text-align:center;color:#607366;font-size:.82rem;margin-top:22px}@media(max-width:620px){.g2{grid-template-columns:1fr}.g3{grid-template-columns:repeat(3,1fr)}.wrap{padding:10px}.hero{border-radius:22px;padding:19px}.card{padding:14px}.metric{font-size:.82rem}.metric b{font-size:1.2rem}.pairBtn{min-height:70px}.roomcode{font-size:1.65rem}}
+    button,input,select{font:inherit}.wrap{max-width:940px;margin:auto;padding:14px 14px 40px}.hero{background:linear-gradient(135deg,#14532d,#16a34a);color:#fff;padding:24px;border-radius:28px;margin-bottom:14px;box-shadow:0 18px 45px #14532d2b}.hero h1{font-size:clamp(1.45rem,5vw,2.25rem);margin:0 0 5px}.hero p{margin:0;opacity:.94}.toprow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;background:#ffffff1c;border:1px solid #ffffff33;font-size:.85rem}.dot{width:9px;height:9px;border-radius:50%;background:#fbbf24}.dot.online{background:#86efac}.card{background:#fff;border:1px solid #bbf7d0;border-radius:var(--r);padding:18px;margin:12px 0;box-shadow:0 10px 28px #14532d12}.grid{display:grid;gap:12px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.actions{display:flex;gap:10px;flex-wrap:wrap}.actions>*{flex:1 1 180px}.btn,input,select{width:100%;min-height:48px;border-radius:14px;padding:11px 13px}.btn{border:0;background:var(--g);color:#fff;font-weight:800;cursor:pointer}.btn.secondary{background:#fff;color:var(--g);border:1px solid var(--g2)}.btn.danger{background:var(--danger)}.btn:disabled{opacity:.45;cursor:not-allowed}input,select{border:1px solid #86efac;background:#fff;color:var(--text);outline:none}input:focus,select:focus{border-color:#16a34a;box-shadow:0 0 0 4px #22c55e22}label{font-weight:700;display:block;margin-bottom:12px}label span{display:block;margin-bottom:6px}.hidden{display:none!important}.status{padding:12px 14px;border-radius:15px;background:#f0fdf4;border:1px dashed #4ade80}.status.error{background:#fef2f2;border-color:#f87171;color:#991b1b}.status.warn{background:#fffbeb;border-color:#fbbf24;color:#92400e}.small{font-size:.9rem;color:#52695a}.metrics{position:sticky;top:8px;z-index:5;margin-bottom:12px}.metric{text-align:center;background:#fff;border-radius:16px;padding:10px;border:1px solid #bbf7d0;box-shadow:0 6px 18px #14532d12}.metric b{display:block;font-size:1.45rem}.pairBtn{width:100%;min-height:88px;background:#fff;color:var(--text);border:1px solid #86efac;border-radius:15px;padding:13px;text-align:left;font-weight:700;cursor:pointer;transition:.15s;overflow-wrap:anywhere}.pairBtn:hover{transform:translateY(-1px);border-color:#16a34a}.pairBtn.sel{outline:3px solid var(--g2);background:#f0fdf4}.pairBtn.done{opacity:.25;text-decoration:line-through;transform:none}.useCard{font-weight:600;line-height:1.45}.rank{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:8px;padding:11px 5px;border-bottom:1px solid var(--soft)}.rankno{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--soft);font-weight:900}.pill{display:inline-block;background:var(--soft);color:var(--g);padding:4px 10px;border-radius:999px;font-size:.85rem}.roomcode{font-size:2rem;letter-spacing:.14em;font-weight:900}.center{text-align:center}.qrbox{display:inline-block;background:#fff;border:8px solid #fff;border-radius:18px;margin:12px 0;box-shadow:0 8px 24px #14532d24}.progress{height:9px;border-radius:999px;background:var(--soft);overflow:hidden;margin-top:8px}.progress>div{height:100%;background:#16a34a;width:0;transition:.2s}.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#143322;color:#fff;padding:11px 16px;border-radius:999px;z-index:20}.footer{text-align:center;color:#607366;font-size:.82rem;margin-top:22px}
+    @media(max-width:620px){.g2{grid-template-columns:1fr}.g3{grid-template-columns:repeat(3,1fr)}.wrap{padding:10px}.hero{border-radius:22px;padding:19px}.card{padding:14px}.metric{font-size:.82rem}.metric b{font-size:1.2rem}.pairBtn{min-height:78px}.roomcode{font-size:1.65rem}}
   </style>
 </head>
 <body>
 <div class="wrap">
-  <header class="hero">
-    <div class="toprow">
-      <div><h1>🌿 ภารกิจผู้พิทักษ์พรรณไม้</h1><p>เรียนรู้ สนุก แข่งขัน และสร้างจิตสำนึกในการอนุรักษ์</p></div>
-      <div class="badge"><span id="netDot" class="dot"></span><span id="netText">กำลังตรวจสอบระบบ</span></div>
-    </div>
-  </header>
-
+  <header class="hero"><div class="toprow"><div><h1>🌿 ภารกิจผู้พิทักษ์พรรณไม้</h1><p>จับคู่ชื่อพรรณไม้ภาษาไทยกับการใช้ประโยชน์ให้ถูกต้อง</p></div><div class="badge"><span id="netDot" class="dot"></span><span id="netText">กำลังตรวจสอบระบบ</span></div></div></header>
   <main>
-    <section id="home" class="card">
-      <h2>เลือกบทบาท</h2>
-      <div class="grid g2">
-        <button id="hostBtn" class="btn">🎛️ ผู้จัดกิจกรรม</button>
-        <button id="joinBtn" class="btn secondary">📱 ผู้เข้าแข่งขัน</button>
-      </div>
-      <p class="small">ผู้จัดสร้างห้องและแสดง QR Code ส่วนผู้เล่นสแกน QR หรือกรอกรหัสห้อง 6 หลัก</p>
-    </section>
-
-    <section id="host" class="card hidden">
-      <div id="hostSetup">
-        <h2>ตั้งค่าการแข่งขัน</h2>
-        <label><span>ชื่อกิจกรรม</span><input id="eventName" maxlength="80" value="ภารกิจผู้พิทักษ์พรรณไม้"></label>
-        <div class="grid g2">
-          <label><span>จำนวนคู่</span><select id="pairCount"><option>6</option><option selected>8</option><option>10</option><option>12</option><option>16</option></select></label>
-          <label><span>เวลาแข่งขัน</span><select id="duration"><option value="60">60 วินาที</option><option value="90" selected>90 วินาที</option><option value="120">120 วินาที</option><option value="180">180 วินาที</option></select></label>
-        </div>
-        <button id="createRoom" class="btn">สร้างห้องและ QR Code</button>
-      </div>
-      <div id="hostLobby" class="hidden">
-        <div class="center">
-          <div class="status">รหัสห้อง<br><span id="roomCode" class="roomcode"></span></div>
-          <div class="qrbox"><canvas id="qrCanvas"></canvas></div>
-          <p class="small">ผู้เล่นสแกน QR นี้เพื่อเข้าห้องโดยตรง</p>
-        </div>
-        <div class="actions">
-          <button id="copyLink" class="btn secondary">คัดลอกลิงก์ห้อง</button>
-          <button id="startGame" class="btn">เริ่มการแข่งขัน</button>
-          <button id="endRoom" class="btn danger">ปิดห้อง</button>
-        </div>
-        <h3>ผู้เข้าร่วม <span id="playerCount" class="pill">0</span></h3>
-        <div id="playerList"><p class="small">ยังไม่มีผู้เล่น</p></div>
-        <h3>กระดานคะแนนสด</h3>
-        <div id="hostBoard"><p class="small">ยังไม่มีคะแนน</p></div>
-      </div>
-    </section>
-
-    <section id="join" class="card hidden">
-      <h2>เข้าร่วมการแข่งขัน</h2>
-      <label><span>ชื่อผู้เล่น</span><input id="playerName" maxlength="30" autocomplete="name" placeholder="เช่น ต้นไม้ ใจดี"></label>
-      <label><span>รหัสห้อง</span><input id="joinCode" maxlength="6" inputmode="numeric" pattern="[0-9]*" placeholder="กรอกรหัส 6 หลัก"></label>
-      <button id="enterRoom" class="btn">เข้าห้อง</button>
-      <div id="joinMessage" class="status hidden" style="margin-top:12px"></div>
-    </section>
-
-    <section id="lobby" class="card hidden">
-      <h2>พร้อมแล้ว 🌱</h2>
-      <div class="status">ห้อง <b id="lobbyCode"></b> • ผู้เล่น <b id="lobbyName"></b></div>
-      <p>กรุณารอผู้จัดกิจกรรมเริ่มการแข่งขัน หน้านี้จะเข้าสู่เกมอัตโนมัติ</p>
-      <div id="onlinePlayers"></div>
-    </section>
-
-    <section id="game" class="hidden">
-      <div class="grid g3 metrics">
-        <div class="metric">คะแนน<b id="score">0</b></div>
-        <div class="metric">จับคู่<b id="matched">0/0</b></div>
-        <div class="metric">เวลา<b id="timer">0</b></div>
-      </div>
-      <div class="card">
-        <div id="feedback" class="status" aria-live="polite">เลือกการ์ดจากทั้งสองฝั่ง</div>
-        <div class="progress"><div id="gameProgress"></div></div>
-        <div class="grid g2" style="margin-top:14px">
-          <div><h3>ชื่อพื้นเมือง</h3><div id="leftCards" class="grid"></div></div>
-          <div><h3>ชื่อวิทยาศาสตร์</h3><div id="rightCards" class="grid"></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="result" class="card hidden">
-      <h2>🏆 ผลการแข่งขัน</h2>
-      <div id="resultText" class="status"></div>
-      <h3>อันดับล่าสุด</h3>
-      <div id="resultBoard"></div>
-      <button id="playAgain" class="btn secondary">กลับหน้าแรก</button>
-    </section>
+    <section id="home" class="card"><h2>เลือกบทบาท</h2><div class="grid g2"><button id="hostBtn" class="btn">🎛️ ผู้จัดกิจกรรม</button><button id="joinBtn" class="btn secondary">📱 ผู้เข้าแข่งขัน</button></div><p class="small">ผู้จัดสร้างห้องและแสดง QR Code ผู้เล่นสแกนเพื่อเข้าร่วมและแข่งขันแบบเรียลไทม์</p></section>
+    <section id="host" class="card hidden"><div id="hostSetup"><h2>ตั้งค่าการแข่งขัน</h2><label><span>ชื่อกิจกรรม</span><input id="eventName" maxlength="80" value="จับคู่พรรณไม้กับการใช้ประโยชน์"></label><div class="grid g2"><label><span>จำนวนคู่</span><select id="pairCount"><option>6</option><option selected>8</option><option>10</option><option>12</option><option>16</option></select></label><label><span>เวลาแข่งขัน</span><select id="duration"><option value="60">60 วินาที</option><option value="90" selected>90 วินาที</option><option value="120">120 วินาที</option><option value="180">180 วินาที</option></select></label></div><button id="createRoom" class="btn">สร้างห้องและ QR Code</button></div><div id="hostLobby" class="hidden"><div class="center"><div class="status">รหัสห้อง<br><span id="roomCode" class="roomcode"></span></div><div class="qrbox"><canvas id="qrCanvas"></canvas></div><p class="small">ผู้เล่นสแกน QR นี้เพื่อเข้าห้องโดยตรง</p></div><div class="actions"><button id="copyLink" class="btn secondary">คัดลอกลิงก์ห้อง</button><button id="startGame" class="btn">เริ่มการแข่งขัน</button><button id="endRoom" class="btn danger">ปิดห้อง</button></div><h3>ผู้เข้าร่วม <span id="playerCount" class="pill">0</span></h3><div id="playerList"><p class="small">ยังไม่มีผู้เล่น</p></div><h3>กระดานคะแนนสด</h3><div id="hostBoard"><p class="small">ยังไม่มีคะแนน</p></div></div></section>
+    <section id="join" class="card hidden"><h2>เข้าร่วมการแข่งขัน</h2><label><span>ชื่อผู้เล่น</span><input id="playerName" maxlength="30" autocomplete="name" placeholder="เช่น ต้นไม้ ใจดี"></label><label><span>รหัสห้อง</span><input id="joinCode" maxlength="6" inputmode="numeric" pattern="[0-9]*" placeholder="กรอกรหัส 6 หลัก"></label><button id="enterRoom" class="btn">เข้าห้อง</button><div id="joinMessage" class="status hidden" style="margin-top:12px"></div></section>
+    <section id="lobby" class="card hidden"><h2>พร้อมแล้ว 🌱</h2><div class="status">ห้อง <b id="lobbyCode"></b> • ผู้เล่น <b id="lobbyName"></b></div><p>กรุณารอผู้จัดกิจกรรมเริ่มการแข่งขัน หน้านี้จะเข้าสู่เกมอัตโนมัติ</p><div id="onlinePlayers"></div></section>
+    <section id="game" class="hidden"><div class="grid g3 metrics"><div class="metric">คะแนน<b id="score">0</b></div><div class="metric">จับคู่<b id="matched">0/0</b></div><div class="metric">เวลา<b id="timer">0</b></div></div><div class="card"><div id="feedback" class="status" aria-live="polite">เลือกชื่อพรรณไม้และการใช้ประโยชน์ที่สัมพันธ์กัน</div><div class="progress"><div id="gameProgress"></div></div><div class="grid g2" style="margin-top:14px"><div><h3>ชื่อภาษาไทย</h3><div id="leftCards" class="grid"></div></div><div><h3>การใช้ประโยชน์</h3><div id="rightCards" class="grid"></div></div></div></div></section>
+    <section id="result" class="card hidden"><h2>🏆 ผลการแข่งขัน</h2><div id="resultText" class="status"></div><h3>อันดับล่าสุด</h3><div id="resultBoard"></div><button id="playAgain" class="btn secondary">กลับหน้าแรก</button></section>
   </main>
-  <footer class="footer">โครงการสวนพฤกษศาสตร์โรงเรียน • ภารกิจผู้พิทักษ์พรรณไม้</footer>
+  <footer class="footer">โครงการสวนพฤกษศาสตร์โรงเรียน • เรียนรู้คุณค่าและการใช้ประโยชน์จากพรรณไม้</footer>
 </div>
 <div id="toast" class="toast hidden" aria-live="polite"></div>
-
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
 <script type="module">
 import { firebaseConfig } from './firebase-config.js';
-const $=id=>document.getElementById(id);
-const views=['home','host','join','lobby','game','result'];
+const $=id=>document.getElementById(id),views=['home','host','join','lobby','game','result'];
 const show=id=>{views.forEach(v=>$(v).classList.add('hidden'));$(id).classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})};
-const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
 const toast=msg=>{$('toast').textContent=msg;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2300)};
+const safe=t=>String(t??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
 let db=null,fb=null,online=false;
-try{
-  online=Boolean(firebaseConfig?.apiKey&&!String(firebaseConfig.apiKey).includes('ใส่'));
-  if(online){
-    const appMod=await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js');
-    const dbMod=await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js');
-    const app=appMod.initializeApp(firebaseConfig);db=dbMod.getDatabase(app);fb=dbMod;
-    $('netDot').classList.add('online');$('netText').textContent='ระบบออนไลน์พร้อมใช้งาน';
-  }else{$('netText').textContent='โหมดทดลอง';}
-}catch(err){online=false;$('netText').textContent='เชื่อมฐานข้อมูลไม่สำเร็จ';console.error(err)}
-let plants=[];
-try{plants=await fetch('./plants.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('plants');return r.json()})}catch(e){alert('ไม่สามารถโหลดข้อมูลพรรณไม้ได้ กรุณาตรวจสอบไฟล์ plants.json')}
+try{online=Boolean(firebaseConfig?.apiKey&&!String(firebaseConfig.apiKey).includes('ใส่'));if(online){const appMod=await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js');const dbMod=await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js');const app=appMod.initializeApp(firebaseConfig);db=dbMod.getDatabase(app);fb=dbMod;$('netDot').classList.add('online');$('netText').textContent='ระบบออนไลน์พร้อมใช้งาน'}else $('netText').textContent='โหมดทดลอง'}catch(e){online=false;$('netText').textContent='เชื่อมฐานข้อมูลไม่สำเร็จ';console.error(e)}
+let plants=[];try{plants=await fetch('./plants.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error();return r.json()});plants=plants.filter(p=>p?.id&&p?.thai&&getUse(p))}catch(e){alert('ไม่สามารถโหลดข้อมูลพรรณไม้ได้ กรุณาตรวจสอบ plants.json')}
+function getUse(p){return p.use||p.benefit||p.benefits||p.utility||p.feature||''}
 let room='',playerId='',playerName='',currentPairs=[],selectedL=null,selectedR=null,score=0,matched=0,timeLeft=0,tick=null,gameStarted=false,finished=false,roomData=null,unsubs=[];
-const cleanup=()=>{unsubs.forEach(fn=>{try{fn()}catch{}});unsubs=[];if(tick)clearInterval(tick)};
-window.addEventListener('beforeunload',cleanup);
+const cleanup=()=>{unsubs.forEach(fn=>{try{fn()}catch{}});unsubs=[];if(tick)clearInterval(tick)};window.addEventListener('beforeunload',cleanup);
 $('hostBtn').onclick=()=>show('host');$('joinBtn').onclick=()=>show('join');$('playAgain').onclick=()=>{cleanup();location.href=location.pathname};
-function makeCode(){return String(Math.floor(100000+Math.random()*900000))}
-function roomUrl(c){return `${location.origin}${location.pathname}?room=${c}`}
-function safe(t){return String(t??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
+const makeCode=()=>String(Math.floor(100000+Math.random()*900000)),roomUrl=c=>`${location.origin}${location.pathname}?room=${c}`;
 async function uniqueRoomCode(){for(let i=0;i<8;i++){const c=makeCode();if(!online)return c;const s=await fb.get(fb.ref(db,`rooms/${c}`));if(!s.exists())return c}throw new Error('สร้างรหัสห้องไม่สำเร็จ')}
-async function createRoom(){
-  $('createRoom').disabled=true;
-  try{
-    room=await uniqueRoomCode();
-    const n=Math.min(+$('pairCount').value,plants.length),seed=Math.floor(Math.random()*1e9);
-    roomData={name:$('eventName').value.trim()||'ภารกิจผู้พิทักษ์พรรณไม้',pairCount:n,duration:+$('duration').value,status:'lobby',seed,createdAt:Date.now(),expiresAt:Date.now()+6*60*60*1000};
-    if(online)await fb.set(fb.ref(db,`rooms/${room}`),roomData);
-    $('roomCode').textContent=room;$('hostSetup').classList.add('hidden');$('hostLobby').classList.remove('hidden');
-    QRCode.toCanvas($('qrCanvas'),roomUrl(room),{width:230,margin:1,errorCorrectionLevel:'M'});
-    if(online){
-      unsubs.push(fb.onValue(fb.ref(db,`rooms/${room}/players`),s=>renderHostPlayers(s.val()||{})));
-      unsubs.push(fb.onValue(fb.ref(db,`rooms/${room}/status`),s=>{if(s.val()==='finished')$('startGame').disabled=true}));
-    }else{$('playerList').innerHTML='<div class="status warn">โหมดทดลองเล่นได้บนอุปกรณ์นี้ แต่การแข่งขันหลายเครื่องต้องตั้งค่า Firebase</div>';}
-  }catch(e){alert('สร้างห้องไม่สำเร็จ: '+e.message)}finally{$('createRoom').disabled=false}
-}
+async function createRoom(){$('createRoom').disabled=true;try{room=await uniqueRoomCode();const n=Math.min(+$('pairCount').value,plants.length),seed=Math.floor(Math.random()*1e9);roomData={name:$('eventName').value.trim()||'จับคู่พรรณไม้กับการใช้ประโยชน์',pairCount:n,duration:+$('duration').value,status:'lobby',seed,createdAt:Date.now(),expiresAt:Date.now()+21600000};if(online)await fb.set(fb.ref(db,`rooms/${room}`),roomData);$('roomCode').textContent=room;$('hostSetup').classList.add('hidden');$('hostLobby').classList.remove('hidden');QRCode.toCanvas($('qrCanvas'),roomUrl(room),{width:230,margin:1,errorCorrectionLevel:'M'});if(online){unsubs.push(fb.onValue(fb.ref(db,`rooms/${room}/players`),s=>renderHostPlayers(s.val()||{})));unsubs.push(fb.onValue(fb.ref(db,`rooms/${room}/status`),s=>{if(s.val()==='finished')$('startGame').disabled=true}))}else $('playerList').innerHTML='<div class="status warn">โหมดทดลองเล่นได้บนอุปกรณ์นี้ แต่การแข่งขันหลายเครื่องต้องตั้งค่า Firebase</div>'}catch(e){alert('สร้างห้องไม่สำเร็จ: '+e.message)}finally{$('createRoom').disabled=false}}
 $('createRoom').onclick=createRoom;
 function rankRows(obj){return Object.values(obj||{}).sort((a,b)=>(b.score||0)-(a.score||0)||(a.finishedAt||9e15)-(b.finishedAt||9e15)).map((p,i)=>`<div class="rank"><span class="rankno">${i+1}</span><span><b>${safe(p.name||'ผู้เล่น')}</b><br><span class="small">${safe(p.status||'รอ')}</span></span><b>${p.score||0}</b></div>`).join('')}
-function renderRanks(obj,target){$(target).innerHTML=rankRows(obj)||'<p class="small">ยังไม่มีคะแนน</p>'}
-function renderHostPlayers(obj){const arr=Object.values(obj);$('playerCount').textContent=arr.length;$('playerList').innerHTML=arr.map(p=>`<div class="rank"><span>🌱</span><span>${safe(p.name)}</span><span class="pill">${safe(p.status||'พร้อม')}</span></div>`).join('')||'<p class="small">ยังไม่มีผู้เล่น</p>';renderRanks(obj,'hostBoard')}
+function renderRanks(obj,target){$(target).innerHTML=rankRows(obj)||'<p class="small">ยังไม่มีคะแนน</p>'}function renderHostPlayers(obj){const arr=Object.values(obj);$('playerCount').textContent=arr.length;$('playerList').innerHTML=arr.map(p=>`<div class="rank"><span>🌱</span><span>${safe(p.name)}</span><span class="pill">${safe(p.status||'พร้อม')}</span></div>`).join('')||'<p class="small">ยังไม่มีผู้เล่น</p>';renderRanks(obj,'hostBoard')}
 $('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(roomUrl(room));toast('คัดลอกลิงก์ห้องแล้ว')}catch{prompt('คัดลอกลิงก์นี้',roomUrl(room))}};
-$('startGame').onclick=async()=>{
-  if(online){const ps=await fb.get(fb.ref(db,`rooms/${room}/players`));if(!ps.exists()&&!confirm('ยังไม่มีผู้เล่น ต้องการเริ่มหรือไม่?'))return;await fb.update(fb.ref(db,`rooms/${room}`),{status:'playing',startedAt:Date.now()});$('startGame').disabled=true;toast('เริ่มการแข่งขันแล้ว')}
-  else{playerName='ผู้จัดกิจกรรม';startGame(roomData.pairCount,roomData.duration,roomData.seed,Date.now())}
-};
+$('startGame').onclick=async()=>{if(online){const ps=await fb.get(fb.ref(db,`rooms/${room}/players`));if(!ps.exists()&&!confirm('ยังไม่มีผู้เล่น ต้องการเริ่มหรือไม่?'))return;await fb.update(fb.ref(db,`rooms/${room}`),{status:'playing',startedAt:Date.now()});$('startGame').disabled=true;toast('เริ่มการแข่งขันแล้ว')}else{playerName='ผู้จัดกิจกรรม';startGame(roomData.pairCount,roomData.duration,roomData.seed,Date.now())}};
 $('endRoom').onclick=async()=>{if(!confirm('ยืนยันปิดห้องแข่งขัน?'))return;if(online)await fb.update(fb.ref(db,`rooms/${room}`),{status:'finished',finishedAt:Date.now()});toast('ปิดห้องแล้ว')};
-async function joinRoom(){
-  playerName=$('playerName').value.trim();room=$('joinCode').value.replace(/\D/g,'').slice(0,6);$('joinCode').value=room;
-  if(!playerName||room.length!==6)return setJoinMessage('กรุณากรอกชื่อและรหัสห้อง 6 หลัก','error');
-  if(!online)return setJoinMessage('ระบบแข่งขันออนไลน์ยังไม่ได้ตั้งค่า Firebase','warn');
-  $('enterRoom').disabled=true;
-  try{
-    const rs=await fb.get(fb.ref(db,`rooms/${room}`));if(!rs.exists())throw new Error('ไม่พบห้องนี้');const r=rs.val();if(r.status!=='lobby')throw new Error(r.status==='playing'?'การแข่งขันเริ่มแล้ว':'ห้องนี้ปิดแล้ว');if(r.expiresAt&&Date.now()>r.expiresAt)throw new Error('ห้องนี้หมดอายุแล้ว');
-    playerId=crypto.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    const playerRef=fb.ref(db,`rooms/${room}/players/${playerId}`);
-    await fb.set(playerRef,{name:playerName,score:0,matched:0,status:'ready',joinedAt:Date.now()});
-    try{await fb.onDisconnect(playerRef).update({status:'offline'})}catch{}
-    $('lobbyCode').textContent=room;$('lobbyName').textContent=playerName;show('lobby');
-    unsubs.push(fb.onValue(fb.ref(db,`rooms/${room}/players`),s=>{$('onlinePlayers').innerHTML=Object.values(s.val()||{}).map(p=>`<div class="rank"><span>🌱</span><span>${safe(p.name)}</span><span class="pill">${safe(p.status||'พร้อม')}</span></div>`).join('')}));
-    unsubs.push(fb.onValue(fb.ref(db,`rooms/${room}`),s=>{const data=s.val();if(!data)return;if(data.status==='playing'&&!gameStarted){gameStarted=true;startGame(data.pairCount||8,data.duration||90,data.seed||1,data.startedAt||Date.now())}else if(data.status==='finished'&&!finished){finish()}}));
-  }catch(e){setJoinMessage(e.message,'error')}finally{$('enterRoom').disabled=false}
-}
-function setJoinMessage(msg,type){$('joinMessage').textContent=msg;$('joinMessage').className=`status ${type||''}`}
-$('enterRoom').onclick=joinRoom;$('joinCode').addEventListener('keydown',e=>{if(e.key==='Enter')joinRoom()});
+async function joinRoom(){playerName=$('playerName').value.trim();room=$('joinCode').value.replace(/\D/g,'').slice(0,6);$('joinCode').value=room;if(!playerName||room.length!==6)return setJoinMessage('กรุณากรอกชื่อและรหัสห้อง 6 หลัก','error');if(!online)return setJoinMessage('ระบบแข่งขันออนไลน์ยังไม่ได้ตั้งค่า Firebase','warn');$('enterRoom').disabled=true;try{const rs=await fb.get(fb.ref(db,`rooms/${room}`));if(!rs.exists())throw new Error('ไม่พบห้องนี้');const r=rs.val();if(r.status!=='lobby')throw new Error(r.status==='playing'?'การแข่งขันเริ่มแล้ว':'ห้องนี้ปิดแล้ว');playerId=crypto.randomUUID?.()||`${Date.now()}-${Math.random().toString(36).slice(2)}`;const playerRef=fb.ref(db,`rooms/${room}/players/${playerId}`);await fb.set(playerRef,{name:playerName,score:0,matched:0,status:'ready',joinedAt:Date.now()});try{await fb.onDisconnect(playerRef).update({status:'offline'})}catch{}$('lobbyCode').textContent=room;$('lobbyName').textContent=playerName;show('lobby');unsubs.push(fb.onValue(fb.ref(db,`rooms/${room}/players`),s=>{$('onlinePlayers').innerHTML=Object.values(s.val()||{}).map(p=>`<div class="rank"><span>🌱</span><span>${safe(p.name)}</span><span class="pill">${safe(p.status||'พร้อม')}</span></div>`).join('')}));unsubs.push(fb.onValue(fb.ref(db,`rooms/${room}`),s=>{const data=s.val();if(!data)return;if(data.status==='playing'&&!gameStarted){gameStarted=true;startGame(data.pairCount||8,data.duration||90,data.seed||1,data.startedAt||Date.now())}else if(data.status==='finished'&&!finished)finish()}))}catch(e){setJoinMessage(e.message,'error')}finally{$('enterRoom').disabled=false}}
+function setJoinMessage(msg,type){$('joinMessage').textContent=msg;$('joinMessage').className=`status ${type||''}`}$('enterRoom').onclick=joinRoom;$('joinCode').addEventListener('keydown',e=>{if(e.key==='Enter')joinRoom()});
 function seededShuffle(arr,seed){let x=seed||1;const rnd=()=>{x=(x*1664525+1013904223)>>>0;return x/4294967296};const b=[...arr];for(let i=b.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b}
 function startGame(n,d,seed,startedAt){currentPairs=seededShuffle(plants,seed).slice(0,Math.min(n,plants.length));score=0;matched=0;selectedL=selectedR=null;finished=false;show('game');renderCards(seed);updateStats();const endAt=startedAt+d*1000;const run=()=>{timeLeft=Math.max(0,Math.ceil((endAt-Date.now())/1000));updateStats();if(timeLeft<=0)finish()};run();tick=setInterval(run,250);if(online&&playerId)fb.update(fb.ref(db,`rooms/${room}/players/${playerId}`),{status:'playing'}).catch(()=>{})}
 function renderCards(seed){$('leftCards').innerHTML='';$('rightCards').innerHTML='';seededShuffle(currentPairs,seed+11).forEach(p=>$('leftCards').append(card(p,'L')));seededShuffle(currentPairs,seed+29).forEach(p=>$('rightCards').append(card(p,'R')))}
-function card(p,side){const b=document.createElement('button');b.className='pairBtn';b.dataset.id=p.id;b.dataset.side=side;b.innerHTML=side==='L'?`<b>${safe(p.thai)}</b><div class="small">รหัส ${safe(p.id)}</div>`:`<i>${safe(p.scientific)}</i><div class="small">${safe(p.family||'')}</div>`;b.onclick=()=>pick(b);return b}
+function card(p,side){const b=document.createElement('button');b.className='pairBtn'+(side==='R'?' useCard':'');b.dataset.id=p.id;b.dataset.side=side;b.innerHTML=side==='L'?`<b>${safe(p.thai)}</b><div class="small">รหัส ${safe(p.id)}</div>`:`<span>${safe(getUse(p))}</span>`;b.onclick=()=>pick(b);return b}
 function pick(b){if(b.disabled||finished)return;document.querySelectorAll(`[data-side="${b.dataset.side}"]`).forEach(x=>{if(!x.disabled)x.classList.remove('sel')});b.classList.add('sel');if(b.dataset.side==='L')selectedL=b;else selectedR=b;if(selectedL&&selectedR)check()}
-function check(){if(selectedL.dataset.id===selectedR.dataset.id){[selectedL,selectedR].forEach(x=>{x.disabled=true;x.classList.add('done')});score+=100+Math.max(0,timeLeft);matched++;const p=currentPairs.find(x=>x.id===selectedL.dataset.id);$('feedback').innerHTML=`✅ ถูกต้อง: <b>${safe(p.thai)}</b><br><span class="small">${safe(p.feature)}</span>`;selectedL=selectedR=null;updateStats();if(online&&playerId)fb.update(fb.ref(db,`rooms/${room}/players/${playerId}`),{score,matched,status:'playing'}).catch(()=>{});if(matched===currentPairs.length)finish()}else{score=Math.max(0,score-20);$('feedback').textContent='❌ ยังไม่ตรงกัน ลองใหม่';const a=selectedL,b=selectedR;selectedL=selectedR=null;setTimeout(()=>{a.classList.remove('sel');b.classList.remove('sel')},350);updateStats()}}
+function check(){if(selectedL.dataset.id===selectedR.dataset.id){[selectedL,selectedR].forEach(x=>{x.disabled=true;x.classList.add('done')});score+=100+Math.max(0,timeLeft);matched++;const p=currentPairs.find(x=>x.id===selectedL.dataset.id);$('feedback').innerHTML=`✅ ถูกต้อง: <b>${safe(p.thai)}</b><br><span class="small">การใช้ประโยชน์: ${safe(getUse(p))}</span>`;selectedL=selectedR=null;updateStats();if(online&&playerId)fb.update(fb.ref(db,`rooms/${room}/players/${playerId}`),{score,matched,status:'playing'}).catch(()=>{});if(matched===currentPairs.length)finish()}else{score=Math.max(0,score-20);$('feedback').textContent='❌ ชื่อพรรณไม้และการใช้ประโยชน์ยังไม่ตรงกัน ลองใหม่';const a=selectedL,b=selectedR;selectedL=selectedR=null;setTimeout(()=>{a.classList.remove('sel');b.classList.remove('sel')},350);updateStats()}}
 function updateStats(){$('score').textContent=score;$('matched').textContent=`${matched}/${currentPairs.length||0}`;$('timer').textContent=timeLeft;$('gameProgress').style.width=currentPairs.length?`${matched/currentPairs.length*100}%`:'0%'}
 async function finish(){if(finished)return;finished=true;if(tick){clearInterval(tick);tick=null}document.querySelectorAll('.pairBtn').forEach(x=>x.disabled=true);if(online&&room&&playerId)await fb.update(fb.ref(db,`rooms/${room}/players/${playerId}`),{score,matched,status:'finished',finishedAt:Date.now()}).catch(()=>{});show('result');$('resultText').innerHTML=`<b>${safe(playerName||'ผู้เล่น')}</b> ได้ <b>${score}</b> คะแนน จับคู่ถูก ${matched}/${currentPairs.length}`;if(online&&room)unsubs.push(fb.onValue(fb.ref(db,`rooms/${room}/players`),s=>renderRanks(s.val()||{},'resultBoard')));else $('resultBoard').innerHTML=`<div class="rank"><span class="rankno">1</span><span>${safe(playerName||'ผู้เล่น')}</span><b>${score}</b></div>`}
-const params=new URLSearchParams(location.search);if(params.get('room')){$('joinCode').value=params.get('room').replace(/\D/g,'').slice(0,6);show('join')}
-if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+const params=new URLSearchParams(location.search);if(params.get('room')){$('joinCode').value=params.get('room').replace(/\D/g,'').slice(0,6);show('join')}if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
 </script>
 </body>
 </html>
