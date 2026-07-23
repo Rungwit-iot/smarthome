@@ -1,0 +1,11 @@
+{
+  "name": "ภารกิจผู้พิทักษ์พรรณไม้",
+  "short_name": "พรรณไม้",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f0fdf4",
+  "theme_color": "#14532d",
+  "description": "เกมจับคู่พรรณไม้สำหรับกิจกรรมสวนพฤกษศาสตร์โรงเรียน",
+  "icons": []
+}
