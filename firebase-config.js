@@ -1,9 +1,10 @@
 export const firebaseConfig = {
-  apiKey: "ใส่_API_KEY_ที่นี่",
-  authDomain: "ใส่_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://ใส่_PROJECT_ID-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "ใส่_PROJECT_ID",
-  storageBucket: "ใส่_PROJECT_ID.appspot.com",
-  messagingSenderId: "ใส่_SENDER_ID",
-  appId: "ใส่_APP_ID"
+  apiKey: "AIzaSyBwyvdwUedRqB-LKM4uJVSK3dX57XEdpm8",
+  authDomain: "plant-guardian-game.firebaseapp.com",
+  databaseURL: "https://plant-guardian-game-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "plant-guardian-game",
+  storageBucket: "plant-guardian-game.firebasestorage.app",
+  messagingSenderId: "166414001452",
+  appId: "1:166414001452:web:43dd65644b2ecc06faf889",
+  measurementId: "G-QC60K1LQ06"
 };
