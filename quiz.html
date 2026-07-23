@@ -25,8 +25,7 @@ input,select{border:1px solid #86efac;background:#fff;color:var(--text)}label{fo
 <body>
 <div class="wrap">
 <header class="hero"><h1>🌿 Plant Guardian Quiz</h1><p>Kahoot + Quizizz สำหรับพรรณไม้ของโรงเรียน</p></header>
-<section id="home" class="card"><h2>เลือกบทบาท</h2><div class="grid g2"><button id="hostBtn" class="btn">🎛️ ผู้จัดกิจกรรม</button><button id="joinBtn" class="btn secondary">📱 ผู้เข้าแข่งขัน</button></div><p class="small">เกมจับคู่เดิมยังคงอยู่ที่หน้า index.html</p></section>
-
+<section id="home" class="card"><h2>เลือกบทบาท</h2><div class="grid g2"><button id="hostBtn" class="btn">🎛️ ผู้จัดกิจกรรม</button><button id="joinBtn" class="btn secondary">📱 ผู้เข้าแข่งขัน</button></div><div id="systemStatus" class="status" style="margin-top:12px">กำลังตรวจสอบระบบ…</div><p class="small">เกมจับคู่เดิมยังคงอยู่ที่หน้า index.html</p></section>
 <section id="host" class="card hidden">
 <div id="hostSetup">
 <h2>ตั้งค่าห้องคำถาม</h2>
@@ -43,7 +42,6 @@ input,select{border:1px solid #86efac;background:#fff;color:var(--text)}label{fo
 <h3>คะแนนสด</h3><div id="hostBoard"><p class="small">ยังไม่มีผู้เล่น</p></div>
 </div>
 </section>
-
 <section id="join" class="card hidden">
 <h2>เข้าร่วมเกม</h2>
 <label><span>ชื่อผู้เล่น</span><input id="playerName" maxlength="30" placeholder="ชื่อเล่น"></label>
@@ -51,9 +49,7 @@ input,select{border:1px solid #86efac;background:#fff;color:var(--text)}label{fo
 <label><span>รหัสห้อง</span><input id="joinCode" maxlength="6" inputmode="numeric" placeholder="รหัส 6 หลัก"></label>
 <button id="enterRoom" class="btn">เข้าห้อง</button><div id="joinMsg" class="status hidden" style="margin-top:12px"></div>
 </section>
-
 <section id="lobby" class="card hidden"><h2>พร้อมแล้ว 🌱</h2><div class="status">ห้อง <b id="lobbyCode"></b> • <b id="lobbyName"></b></div><p>รอผู้จัดกิจกรรมเริ่มเกม</p></section>
-
 <section id="game" class="hidden">
 <div class="quizTop"><div class="metric">คะแนน<b id="score">0</b></div><div class="metric">ข้อ<b id="qno">0/0</b></div><div class="metric">เวลา<b id="timer">0</b></div></div>
 <div class="card">
@@ -64,20 +60,18 @@ input,select{border:1px solid #86efac;background:#fff;color:var(--text)}label{fo
 <div id="feedback" class="status hidden" style="margin-top:12px"></div>
 </div>
 </section>
-
 <section id="result" class="card hidden"><h2>🏆 ผลการแข่งขัน</h2><div id="resultText" class="status"></div><h3>อันดับล่าสุด</h3><div id="resultBoard"></div><button id="backHome" class="btn secondary">กลับหน้าแรก</button></section>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
 <script type="module">
 import { firebaseConfig } from './firebase-config.js';
-import { plantsV2 as plants, plantDatabaseMeta } from './plants-v2.js';
+import { plantsV2 as plantsSource, plantDatabaseMeta } from './plants-v2.js';
 const $=id=>document.getElementById(id),views=['home','host','join','lobby','game','result'];
 const show=id=>{views.forEach(v=>$(v).classList.add('hidden'));$(id).classList.remove('hidden');scrollTo({top:0,behavior:'smooth'})};
 const safe=s=>String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+const plants=plantsSource.filter(p=>p.id&&p.thai&&(p.use||p.feature));
 let db,fb,online=false;
-try{const appMod=await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js');const dbMod=await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js');const app=appMod.initializeApp(firebaseConfig);db=dbMod.getDatabase(app);fb=dbMod;online=true}catch(e){console.error(e)}
-plants=plants.filter(p=>p.id&&p.thai&&(p.use||p.feature));
+try{const appMod=await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js');const dbMod=await import('https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js');const app=appMod.initializeApp(firebaseConfig);db=dbMod.getDatabase(app);fb=dbMod;online=true;$('systemStatus').textContent=`✅ ระบบพร้อม • ฐานข้อมูล ${plants.length} รายการ`;}catch(e){console.error(e);$('systemStatus').textContent='⚠️ เปิดหน้าเกมได้ แต่ยังเชื่อม Firebase ไม่สำเร็จ';$('systemStatus').className='status warn'}
 let room='',playerId='',name='',team='',roomData=null,questions=[],index=0,score=0,timeLeft=0,tick=null,answered=false,eliminated=false,unsubs=[];
 const roomUrl=c=>`${location.origin}${location.pathname}?room=${c}`;
 const makeCode=()=>String(Math.floor(100000+Math.random()*900000));
@@ -85,17 +79,17 @@ function shuffle(a,seed){let x=seed||1;const r=()=>{x=(x*1664525+1013904223)>>>0
 function getUse(p){return p.use||p.feature}
 function rankRows(obj){return Object.values(obj||{}).sort((a,b)=>(b.score||0)-(a.score||0)).map((p,i)=>`<div class="rank"><span class="rankno">${['🥇','🥈','🥉'][i]||i+1}</span><span><b>${safe(p.name)}</b>${p.team?`<br><span class="small">${safe(p.team)}</span>`:''}</span><b>${p.score||0}</b></div>`).join('')}
 $('hostBtn').onclick=()=>show('host');$('joinBtn').onclick=()=>show('join');$('backHome').onclick=()=>location.href=location.pathname;
-$('createRoom').onclick=async()=>{if(!online)return alert('เชื่อม Firebase ไม่สำเร็จ');room=makeCode();const seed=Math.floor(Math.random()*1e9);roomData={type:'quiz',mode:$('mode').value,questionCount:+$('questionCount').value,seconds:+$('seconds').value,seed,status:'lobby',createdAt:Date.now()};await fb.set(fb.ref(db,`quizRooms/${room}`),roomData);$('roomCode').textContent=room;$('hostSetup').classList.add('hidden');$('hostLobby').classList.remove('hidden');QRCode.toCanvas($('qrCanvas'),roomUrl(room),{width:230,margin:1});unsubs.push(fb.onValue(fb.ref(db,`quizRooms/${room}/players`),s=>$('hostBoard').innerHTML=rankRows(s.val()||{})||'<p class="small">ยังไม่มีผู้เล่น</p>'))};
+$('createRoom').onclick=async()=>{if(!online)return alert('เชื่อม Firebase ไม่สำเร็จ กรุณารีเฟรชหน้าเว็บ');try{room=makeCode();const seed=Math.floor(Math.random()*1e9);roomData={type:'quiz',mode:$('mode').value,questionCount:+$('questionCount').value,seconds:+$('seconds').value,seed,status:'lobby',createdAt:Date.now()};await fb.set(fb.ref(db,`quizRooms/${room}`),roomData);$('roomCode').textContent=room;$('hostSetup').classList.add('hidden');$('hostLobby').classList.remove('hidden');if(globalThis.QRCode?.toCanvas)await QRCode.toCanvas($('qrCanvas'),roomUrl(room),{width:230,margin:1});unsubs.push(fb.onValue(fb.ref(db,`quizRooms/${room}/players`),s=>$('hostBoard').innerHTML=rankRows(s.val()||{})||'<p class="small">ยังไม่มีผู้เล่น</p>'))}catch(e){console.error(e);alert('สร้างห้องไม่สำเร็จ: '+e.message)}};
 $('copyLink').onclick=async()=>{try{await navigator.clipboard.writeText(roomUrl(room))}catch{prompt('คัดลอกลิงก์',roomUrl(room))}};
-$('startRoom').onclick=async()=>{await fb.update(fb.ref(db,`quizRooms/${room}`),{status:'playing',startedAt:Date.now()});$('startRoom').disabled=true};
-async function enterRoom(){name=$('playerName').value.trim();room=$('joinCode').value.replace(/\D/g,'').slice(0,6);if(!name||room.length!==6)return msg('กรุณากรอกชื่อและรหัสห้อง 6 หลัก','error');const s=await fb.get(fb.ref(db,`quizRooms/${room}`));if(!s.exists())return msg('ไม่พบห้องนี้','error');roomData=s.val();team=$('teamName').value.trim();if(roomData.mode==='team'&&!team){$('teamLabel').classList.remove('hidden');return msg('โหมดทีม กรุณากรอกชื่อทีม','warn')}playerId=crypto.randomUUID?.()||Date.now()+'';await fb.set(fb.ref(db,`quizRooms/${room}/players/${playerId}`),{name,team,score:0,status:'ready',joinedAt:Date.now()});$('lobbyCode').textContent=room;$('lobbyName').textContent=name;show('lobby');unsubs.push(fb.onValue(fb.ref(db,`quizRooms/${room}`),snap=>{const d=snap.val();if(d?.status==='playing'&&!questions.length)startGame(d)}))}
+$('startRoom').onclick=async()=>{try{await fb.update(fb.ref(db,`quizRooms/${room}`),{status:'playing',startedAt:Date.now()});$('startRoom').disabled=true}catch(e){alert('เริ่มเกมไม่สำเร็จ: '+e.message)}};
+async function enterRoom(){name=$('playerName').value.trim();room=$('joinCode').value.replace(/\D/g,'').slice(0,6);if(!name||room.length!==6)return msg('กรุณากรอกชื่อและรหัสห้อง 6 หลัก','error');if(!online)return msg('ยังเชื่อม Firebase ไม่สำเร็จ กรุณารีเฟรชหน้าเว็บ','error');try{const s=await fb.get(fb.ref(db,`quizRooms/${room}`));if(!s.exists())return msg('ไม่พบห้องนี้','error');roomData=s.val();team=$('teamName').value.trim();if(roomData.mode==='team'&&!team){$('teamLabel').classList.remove('hidden');return msg('โหมดทีม กรุณากรอกชื่อทีม','warn')}playerId=crypto.randomUUID?.()||Date.now()+'';await fb.set(fb.ref(db,`quizRooms/${room}/players/${playerId}`),{name,team,score:0,status:'ready',joinedAt:Date.now()});$('lobbyCode').textContent=room;$('lobbyName').textContent=name;show('lobby');unsubs.push(fb.onValue(fb.ref(db,`quizRooms/${room}`),snap=>{const d=snap.val();if(d?.status==='playing'&&!questions.length)startGame(d)}))}catch(e){console.error(e);msg('เข้าห้องไม่สำเร็จ: '+e.message,'error')}}
 function msg(t,c){$('joinMsg').textContent=t;$('joinMsg').className=`status ${c||''}`}
 $('enterRoom').onclick=enterRoom;
 function buildQuestions(d){const selected=shuffle(plants,d.seed).slice(0,Math.min(d.questionCount,plants.length));return selected.map((p,i)=>{const wrong=shuffle(plants.filter(x=>x.id!==p.id),d.seed+i+99).slice(0,3).map(getUse);return{p,answers:shuffle([getUse(p),...wrong],d.seed+i+333)}})}
 function startGame(d){roomData=d;questions=buildQuestions(d);index=0;score=0;eliminated=false;show('game');renderQuestion()}
-function renderQuestion(){if(index>=questions.length||eliminated)return finish();answered=false;const q=questions[index];$('qno').textContent=`${index+1}/${questions.length}`;$('progressBar').style.width=`${index/questions.length*100}%`;$('question').textContent=`${q.p.thai} มีลักษณะหรือการใช้ประโยชน์ข้อใด?`;$('feedback').classList.add('hidden');const box=$('plantImage');box.innerHTML=q.p.image?`<img src="${safe(q.p.image)}" alt="${safe(q.p.thai)}">`:'🌿';$('answers').innerHTML='';q.answers.forEach((a,n)=>{const b=document.createElement('button');b.className='answer';b.innerHTML=`<b>${['▲','◆','●','■'][n]}</b> ${safe(a)}`;b.onclick=()=>answer(b,a);$('answers').append(b)});timeLeft=roomData.seconds;$('timer').textContent=timeLeft;clearInterval(tick);tick=setInterval(()=>{timeLeft--;$('timer').textContent=timeLeft;if(timeLeft<=0){clearInterval(tick);answer(null,'')}},1000)}
-async function answer(btn,value){if(answered)return;answered=true;clearInterval(tick);const q=questions[index],correct=value===getUse(q.p);document.querySelectorAll('.answer').forEach(b=>{b.disabled=true;if(b.textContent.includes(getUse(q.p)))b.classList.add('correct')});if(!correct&&btn)btn.classList.add('wrong');if(correct){let gain=100;if(roomData.mode==='time')gain+=timeLeft*20;else gain+=timeLeft*5;score+=gain;$('feedback').textContent=`✅ ถูกต้อง +${gain} คะแนน`}else{if(roomData.mode==='battle'){eliminated=true;$('feedback').textContent='💥 ตอบผิด ถูกคัดออกจาก Battle Royale'}else $('feedback').textContent='❌ ยังไม่ถูกต้อง'}$('feedback').classList.remove('hidden');$('score').textContent=score;await fb.update(fb.ref(db,`quizRooms/${room}/players/${playerId}`),{score,status:eliminated?'eliminated':'playing',answered:index+1});setTimeout(()=>{index++;renderQuestion()},1200)}
-async function finish(){clearInterval(tick);await fb.update(fb.ref(db,`quizRooms/${room}/players/${playerId}`),{score,status:'finished',finishedAt:Date.now()});show('result');$('resultText').innerHTML=`<b>${safe(name)}</b> ได้ <b>${score}</b> คะแนน`;unsubs.push(fb.onValue(fb.ref(db,`quizRooms/${room}/players`),s=>$('resultBoard').innerHTML=rankRows(s.val()||{})))}
+function renderQuestion(){if(index>=questions.length||eliminated)return finish();answered=false;const q=questions[index];$('qno').textContent=`${index+1}/${questions.length}`;$('progressBar').style.width=`${index/questions.length*100}%`;$('question').textContent=`${q.p.thai} มีลักษณะหรือการใช้ประโยชน์ข้อใด?`;$('feedback').classList.add('hidden');const box=$('plantImage');box.innerHTML=q.p.image?`<img src="${safe(q.p.image)}" alt="${safe(q.p.thai)}" onerror="this.parentElement.textContent='🌿'">`:'🌿';$('answers').innerHTML='';q.answers.forEach((a,n)=>{const b=document.createElement('button');b.className='answer';b.innerHTML=`<b>${['▲','◆','●','■'][n]}</b> ${safe(a)}`;b.onclick=()=>answer(b,a);$('answers').append(b)});timeLeft=roomData.seconds;$('timer').textContent=timeLeft;clearInterval(tick);tick=setInterval(()=>{timeLeft--;$('timer').textContent=timeLeft;if(timeLeft<=0){clearInterval(tick);answer(null,'')}},1000)}
+async function answer(btn,value){if(answered)return;answered=true;clearInterval(tick);const q=questions[index],correct=value===getUse(q.p);document.querySelectorAll('.answer').forEach(b=>{b.disabled=true;if(b.textContent.includes(getUse(q.p)))b.classList.add('correct')});if(!correct&&btn)btn.classList.add('wrong');if(correct){let gain=100;if(roomData.mode==='time')gain+=timeLeft*20;else gain+=timeLeft*5;score+=gain;$('feedback').textContent=`✅ ถูกต้อง +${gain} คะแนน`}else{if(roomData.mode==='battle'){eliminated=true;$('feedback').textContent='💥 ตอบผิด ถูกคัดออกจาก Battle Royale'}else $('feedback').textContent='❌ ยังไม่ถูกต้อง'}$('feedback').classList.remove('hidden');$('score').textContent=score;try{await fb.update(fb.ref(db,`quizRooms/${room}/players/${playerId}`),{score,status:eliminated?'eliminated':'playing',answered:index+1})}catch(e){console.error(e)}setTimeout(()=>{index++;renderQuestion()},1200)}
+async function finish(){clearInterval(tick);try{await fb.update(fb.ref(db,`quizRooms/${room}/players/${playerId}`),{score,status:'finished',finishedAt:Date.now()})}catch(e){console.error(e)}show('result');$('resultText').innerHTML=`<b>${safe(name)}</b> ได้ <b>${score}</b> คะแนน`;unsubs.push(fb.onValue(fb.ref(db,`quizRooms/${room}/players`),s=>$('resultBoard').innerHTML=rankRows(s.val()||{})))}
 const params=new URLSearchParams(location.search);if(params.get('room')){$('joinCode').value=params.get('room').replace(/\D/g,'').slice(0,6);show('join')}
 </script>
 </body>
